@@ -1,8 +1,10 @@
+
 # <div align='center'>Baileys</div>
 
 <div align='center'>
 
 [![GitHub](https://img.shields.io/github/stars/K4lameety/baileys?style=social)](https://github.com/K4lameety/baileys)
+[![NPM Version](https://img.shields.io/npm/v/@k4la/baileys.svg?color=orange&label=npm)](https://www.npmjs.com/package/@k4la/baileys)
 [![License](https://img.shields.io/badge/license-GPL%203-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/K4lameety/baileys)](https://github.com/K4lameety/baileys/issues)
 
@@ -10,15 +12,44 @@
 
 ---
 
-## ✨ Key Features
+<details>
+    <summary>Table of Contents</summary>
+    <ul>
+        <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#warning">Warning</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#quick-start">Quick Start</a></li>
+        <li><a href="#account-connection">Account Connection</a></li>
+        <li><a href="#important-socket-configuration-notes">Important Socket Configuration Notes</a></li>
+        <li><a href="#save-auth-info">Save Auth Info</a></li>
+        <li><a href="#data-store-implementation">Data Store Implementation</a></li>
+        <li><a href="#whatsapp-id-explanation">WhatsApp ID Explanation</a></li>
+        <li><a href="#utility-functions">Utility Functions</a></li>
+        <li><a href="#send-messages">Send Messages</a></li>
+        <li><a href="#modify-messages">Modify Messages</a></li>
+        <li><a href="#media-message-manipulation">Media Message Manipulation</a></li>
+        <li><a href="#send-status-in-chat">Send Status in Chat</a></li>
+        <li><a href="#modify-chats">Modify Chats</a></li>
+        <li><a href="#query-users">Query Users</a></li>
+        <li><a href="#modify-profile">Modify Profile</a></li>
+        <li><a href="#groups">Groups</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#broadcast-lists--stories">Broadcast Lists & Stories</a></li>
+        <li><a href="#custom-functions">Custom Functions</a></li>
+        <li><a href="#tips--best-practices">Tips & Best Practices</a></li>
+        <li><a href="#license">License</a></li>
+    </ul>
+</details>
 
-- 🚀 **Modern & Fast** - Built with TypeScript and the latest technology
-- 🔧 **@lid & @jid Fix** - Resolves @lid to @pn issues in WhatsApp groups
-- 📱 **Multi-Device Support** - Supports WhatsApp multi-device connections
-- 🔐 **End-to-End Encryption** - Fully encrypted communication
-- 📨 **All Message Types** - Supports text, media, polling, etc.
+## Key Features
 
-## ⚠️ Warning
+- Modern & Fast - Built with TypeScript and the latest technology
+- @lid & @jid Fix - Resolves @lid to @pn issues in WhatsApp groups
+- Multi-Device Support - Supports WhatsApp multi-device connections
+- End-to-End Encryption - Fully encrypted communication
+- All Message Types - Supports text, media, polling, etc.
+
+## Warning
 
 This project is not affiliated, associated, authorized, endorsed, or officially connected with WhatsApp or any of its subsidiaries. The official WhatsApp website is at whatsapp.com.
 
@@ -26,14 +57,12 @@ The Baileys maintainers do not support the use of this application for violating
 
 Use wisely. Avoid spam. Do not use excessive automation.
 
-## 📦 Installation
+## Installation
 
-### Install from GitHub
+### Install from NPM
 
 ```bash
-npm i github:K4lameety/baileys
-# or
-yarn add github:K4lameety/baileys
+npm i @k4la/baileys
 ```
 
 ### Import in Code
@@ -44,7 +73,7 @@ const { default: makeWASocket } = require("baileys")
 import makeWASocket from "baileys"
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Basic Example
 
@@ -93,11 +122,11 @@ async function connectToWhatsApp() {
 connectToWhatsApp()
 ```
 
-## 📋 Table of Contents
+## Table of Contents
 
 Disclaimer: This documentation is still in beta, so there may be errors or inconsistencies 
 
-## 🔌 Account Connection
+## Account Connection
 
 WhatsApp provides a multi-device API that allows Baileys to authenticate as a secondary WhatsApp client via QR code or pairing code.
 
@@ -161,7 +190,7 @@ const sock = makeWASocket({
 })
 ```
 
-## ⚙️ Important Socket Configuration Notes
+## Important Socket Configuration Notes
 
 ### Group Metadata Caching (Recommended)
 
@@ -208,7 +237,7 @@ const sock = makeWASocket({
 })
 ```
 
-## 💾 Save Auth Info
+## Save Auth Info
 
 Avoid repeated QR code scanning by saving credentials:
 
@@ -306,7 +335,7 @@ sock.ev.on('messages.update', event => {
 1. On first connection, `connection.update` will be triggered requesting sock restart.
 2. Then, history messages are received in `messaging.history-set`.
 
-## 🗄️ Data Store Implementation
+## Data Store Implementation
 
 Baileys does not include default storage for chats, contacts, or messages. However, a simple in-memory implementation is provided. The store listens to chat updates, new messages, etc., to keep data up to date.
 
@@ -339,7 +368,7 @@ sock.ev.on('contacts.upsert', () => {
 
 The store also provides simple functions like `loadMessages` to speed up data retrieval.
 
-## 🆔 WhatsApp ID Explanation
+## WhatsApp ID Explanation
 
 `id` is the WhatsApp ID, also called `jid`, for the person or group you're sending a message to.
 
@@ -352,14 +381,14 @@ For broadcast lists: `[creation timestamp]@broadcast`.
 
 For stories: `status@broadcast`.
 
-## 🔧 Utility Functions
+## Utility Functions
 
 - `getContentType` - Returns the content type of a message
 - `getDevice` - Returns the device from a message
 - `makeCacheableSignalKeyStore` - Speeds up auth store
 - `downloadContentFromMessage` - Download content from a message
 
-## 📤 Send Messages
+## Send Messages
 
 Send all types of messages with a single function.
 
@@ -608,7 +637,7 @@ await sock.sendMessage(
 )
 ```
 
-## ✏️ Modify Messages
+## Modify Messages
 
 ### Delete Message (for everyone)
 
@@ -630,7 +659,7 @@ await sock.sendMessage(jid, {
     });
 ```
 
-## 🖼️ Media Message Manipulation
+## Media Message Manipulation
 
 ### Thumbnail in Media Messages
 
@@ -674,7 +703,7 @@ WA deletes old media from servers. Re-upload with:
 await sock.updateMediaMessage(msg)
 ```
 
-## 📞 Reject Calls
+## Reject Calls
 
 Get `callId` and `callFrom` from the `call` event.
 
@@ -682,7 +711,7 @@ Get `callId` and `callFrom` from the `call` event.
 await sock.rejectCall(callId, callFrom)
 ```
 
-## 💬 Send Status in Chat
+## Send Status in Chat
 
 ### Read Messages
 
@@ -707,7 +736,7 @@ await sock.sendPresenceUpdate('available', jid)
 
 > [!NOTE] If desktop client is active, WA doesn't send push notifications. To receive notifications, set offline with `sock.sendPresenceUpdate('unavailable')`.
 
-## 📁 Modify Chats
+## Modify Chats
 
 WA uses encrypted communication for chat/app updates.
 
@@ -839,7 +868,7 @@ await sock.sendMessage(
 )
 ```
 
-## 👤 Query Users
+## Query Users
 
 ### Check if ID Exists on WhatsApp
 
@@ -896,7 +925,7 @@ sock.ev.on('presence.update', console.log)
 await sock.presenceSubscribe(jid) 
 ```
 
-## 🔄 Modify Profile
+## Modify Profile
 
 ### Update Profile Status
 
@@ -924,7 +953,7 @@ await sock.updateProfilePicture(jid, { url: './new-profile-picture.jpeg' })
 await sock.removeProfilePicture(jid)
 ```
 
-## 👥 Groups
+## Groups
 
 To modify group properties, you must be an admin.
 
@@ -1072,7 +1101,7 @@ await sock.groupMemberAddMode(
 )
 ```
 
-## 🔒 Privacy
+## Privacy
 
 ### Block/Unblock User
 
@@ -1153,7 +1182,7 @@ const ephemeral = 86400
 await sock.updateDefaultDisappearingMode(ephemeral)
 ```
 
-## 📢 Broadcast Lists & Stories
+## Broadcast Lists & Stories
 
 ### Send Broadcast & Stories
 
@@ -1192,7 +1221,7 @@ const bList = await sock.getBroadcastListInfo('1234@broadcast')
 console.log(`list name: ${bList.name}, recipients: ${bList.recipients}`)
 ```
 
-## 🛠️ Custom Functions
+## Custom Functions
 
 Baileys is designed for custom functions. Add your own extensions without forking.
 
@@ -1259,7 +1288,7 @@ sock.ws.on('CB:edge_routing,id:abcd', (node: BinaryNode) => { })
 sock.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
 ```
 
-## 💡 Tips & Best Practices
+## Tips & Best Practices
 
 - **Use Caching**: Cache group metadata for better performance.
 - **Handle Reconnection**: Implement auto-reconnect for stability.
@@ -1268,7 +1297,7 @@ sock.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
 - **Rate Limits**: Respect WhatsApp limits to avoid bans—don't spam.
 - **Security**: Don't share auth credentials; use environment variables.
 
-## 📄 License
+## License
 
 Distributed under the GPL-3.0 License. See [LICENSE](LICENSE) for more information.
 
